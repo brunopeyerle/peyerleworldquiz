@@ -1,0 +1,265 @@
+body {
+  font-family: 'Roboto', Arial, sans-serif; /* Modern font */
+  background-image: url('./img/background.mov'); /* Path to the background image */
+  background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat; /* Não repete a imagem */
+  image-rendering: auto; /* Garante que a imagem seja renderizada com qualidade */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #333; /* Default text color */
+}
+
+/* Estilo para o vídeo de fundo */
+#background-video {
+  position: fixed; /* Fixa o vídeo no fundo */
+  top: 0;
+  left: 0;
+  width: 100%; /* Faz o vídeo cobrir toda a largura */
+  height: 100%; /* Faz o vídeo cobrir toda a altura */
+  object-fit: cover; /* Ajusta o vídeo para cobrir a tela sem distorção */
+  z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+  opacity: 0.8; /* Ajusta a opacidade para melhorar a legibilidade do conteúdo */
+}
+
+/* Container do quiz com mais transparência */
+#quiz-container {
+  position: relative; /* Garante que o conteúdo fique acima do vídeo */
+  background-color: rgba(240, 248, 255, 0.6); /* Fundo com transparência (80%) */
+  padding: 50px 20px 20px; /* Reduz o padding inferior */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* Limita a largura máxima */
+  margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+h1 {
+  font-family: 'Roboto', Arial, sans-serif; /* Substitui Pacifico por Roboto */
+  font-size: 2.5em;
+  color: #333333; /* Cor do texto */
+  margin-bottom: 10px;
+}
+
+#question {
+  font-family: 'Roboto', Arial, sans-serif; /* Fonte similar ao Google Sans */
+  font-size: 1.8em; /* Ajuste o tamanho da fonte */
+  color: #003366; /* Azul marinho */
+  text-align: center; /* Centraliza o texto */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra leve */
+  margin-bottom: 10px; /* Reduz o espaçamento inferior */
+}
+
+#question span {
+  font-family: 'Roboto', Arial, sans-serif; /* Substitui Pacifico por Roboto */
+  font-size: 1.8em; /* Ajuste o tamanho da fonte */
+  color: #003366; /* Azul marinho */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra leve */
+  margin-bottom: 1px0px; /* Espaçamento inferior */
+}
+
+button {
+  background-color: #F5DEB3; /* Beige background color */
+  color: #333333; /* Dark text color */
+  border: none; /* Remove border */
+  padding: 12px 25px; /* Internal spacing */
+  margin: 10px 5px; /* Margin between buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 25px; /* Rounded corners */
+  font-size: 1em; /* Font size */
+  font-weight: bold; /* Bold text */
+  transition: all 0.3s ease; /* Smooth transition for hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+button:hover {
+  background-color: #D2B48C; /* Darker beige on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+#result {
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333333;
+}
+
+/* Style for the image container */
+#image-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  gap: 10px; /* Space between the image and the button */
+  margin-top: 10px; /* Add spacing above the container */
+  position: relative; /* Ensure proper positioning for child elements */
+}
+
+/* Style for the image */
+#image-container img {
+  max-width: 100%; /* Limit the maximum width to the container size */
+  width: 300px; /* Set a fixed width */
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Adjust the image to fill the space without distortion */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the image */
+  display: block; /* Ensure the image behaves as a block element */
+}
+
+#weather-container {
+  display: flex; /* Alinha os itens horizontalmente */
+  flex-direction: column; /* Empilha os itens verticalmente */
+  align-items: center; /* Centraliza os itens horizontalmente */
+  gap: 10px; /* Reduz o espaçamento entre os itens */
+  margin-top: 20px; /* Espaçamento superior */
+}
+
+#weather-info {
+  display: flex; /* Alinha o ícone e o texto horizontalmente */
+  align-items: center; /* Alinha verticalmente o ícone e o texto */
+  gap: 10px; /* Espaçamento entre o ícone e o texto */
+  text-align: center; /* Centraliza o texto */
+}
+
+#weather-container img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0; /* Remove o espaçamento lateral */
+}
+
+/* Botão "New Question" permanece cinza */
+#new-question-button {
+  background-color: #c4c0ba; /* Cor de fundo */
+  color: #333333; /* Cor do texto */
+  border: none; /* Remove bordas */
+  padding: 12px 25px; /* Espaçamento interno */
+  font-size: 1em; /* Tamanho da fonte */
+  font-weight: bold; /* Texto em negrito */
+  border-radius: 25px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  transition: all 0.3s ease; /* Transição suave para hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  margin: 0; /* Remove margens extras */
+}
+
+#new-question-button:hover {
+  background-color: #003366; /* Cor de fundo ao passar o mouse */
+  color: #FFFFFF;
+  transform: scale(1.05); /* Aumenta ligeiramente o botão */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+}
+
+/* Style for the answers container */
+#answers-container {
+  display: flex; /* Usa flexbox para layout */
+  flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha, se necessário */
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: 10px; /* Reduz o espaçamento superior */
+}
+
+/* Botões de cidades (respostas) com azul marinho */
+#answers-container button {
+  white-space: normal; /* Allow text to wrap to the next line if necessary */
+  text-align: center; /* Center the text inside the button */
+  padding: 10px 20px; /* Internal spacing */
+  font-size: 1em; /* Font size */
+  font-weight: bold; /* Bold text */
+  background-color: #003366; /* Azul marinho */
+  color: #FFFFFF; /* Texto branco */
+  border: none; /* Remove border */
+  border-radius: 25px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Hover effect para os botões de cidades */
+#answers-container button:hover {
+  background-color: #002244; /* Azul marinho mais escuro no hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+#logo {
+  display: block;
+  margin: 0px auto; /* Reduz a margem superior e inferior */
+  width: 300px; /* Ajuste a largura conforme necessário */
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+@media (max-width: 768px) {
+  body {
+    background-image: url('./img/background-small.jpg'); /* Use uma imagem menor para dispositivos móveis */
+  }
+
+  #quiz-container {
+    background-color: transparent !important; /* Fundo 100% transparente */
+    box-shadow: none !important; /* Remove a sombra */
+    padding: 20px 10px; /* Reduz o padding para economizar espaço */
+    max-width: 90%; /* Ajusta a largura máxima para caber melhor na tela */
+  }
+
+  #logo {
+    margin: 10px auto 0; /* Reduz a margem superior para 10px e remove a margem inferior */
+    width: 300px; /* Mantém o tamanho reduzido do logo */
+    position: relative; /* Garante que o posicionamento seja relativo ao contêiner */
+    top: -20px; /* Move o logo 20px para cima */
+    bottom: 110px;
+  }
+
+  #question {
+    color: #FFFFFF; /* Texto branco */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra no texto */
+    font-size: 1.5em; /* Ajuste o tamanho da fonte, se necessário */
+    margin-top: 20px; /* Espaçamento superior */
+    margin-bottom: 50px; /* Espaçamento inferior */
+  }
+
+  #answers-container {
+    display: grid; /* Usa grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Cria 2 colunas de tamanhos iguais */
+    gap: 10px; /* Espaçamento entre os botões */
+    justify-content: center; /* Centraliza o grid horizontalmente */
+    margin-top: 20px; /* Espaçamento superior */
+    margin-bottom: 20px; /* Espaçamento inferior */
+  }
+
+  #answers-container button {
+    font-size: 0.9em; /* Ajusta o tamanho da fonte dos botões */
+    padding: 10px 15px; /* Ajusta o padding interno dos botões */
+  }
+
+  #image-container img {
+    width: 100%; /* Faz a imagem ocupar toda a largura disponível */
+    height: auto; /* Mantém a proporção da imagem */
+  }
+
+  #weather-container {
+    gap: 8px; /* Reduz o espaçamento entre os itens */
+    margin-top: 15px; /* Ajusta o espaçamento superior */
+  }
+
+  #new-question-button {
+    font-size: 0.9em; /* Reduz o tamanho da fonte do botão */
+    padding: 10px 20px; /* Ajusta o padding interno */
+    margin-top: 15px; /* Adiciona um pequeno espaçamento superior */
+    margin-bottom: 15px; /* Espaçamento inferior */
+  }
+
+  #result {
+    color: #FFFFFF; /* Texto branco */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra no texto */
+    font-size: 1.2em; /* Ajusta o tamanho da fonte */
+    margin-top: 10px; /* Espaçamento superior */
+  }
+
+  #weather-info {
+    color: #FFFFFF; /* Texto branco */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra no texto */
+    text-align: center; /* Centraliza o texto */
+  }
+}

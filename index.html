@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <video autoplay muted loop id="background-video">
+    <source src="./img/background2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div id="quiz-container">
+    <img src="./img/logo.png" alt="Country Quiz Logo" id="logo" />
+    <div id="question-container">
+      <p id="question">
+        What is the capital of France?
+      </p>
+      <div id="answers-container">
+        <!-- Answer buttons will be generated dynamically -->
+      </div>
+    </div>
+    <div id="result"></div>
+    <div id="image-container">
+      <!-- A imagem será gerada dinamicamente -->
+    </div>
+    <div id="weather-container">
+      <div id="weather-info">
+        <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Clear" style="width: 60px; height: 60px;">
+        <div>
+          <p style="margin: 0; font-weight: bold;">Clear</p>
+          <p style="margin: 0;">Temperature: 25°C</p>
+        </div>
+      </div>
+    </div>
+    <button id="new-question-button" onclick="getRandomQuestion()">New Question</button>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
