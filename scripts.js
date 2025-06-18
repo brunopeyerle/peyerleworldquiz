@@ -6,7 +6,7 @@ let currentQuestion = null; // Pergunta atual
 
 // Fetch all countries and capitals from the API
 function fetchCountries() {
-  fetch('https://restcountries.com/v3.1/all')
+  fetch('https://restcountries.com/v3.1/all?fields=name,capital')
     .then(response => response.json())
     .then(data => {
       countries = data
@@ -76,12 +76,68 @@ function getRandomQuestion() {
   generateAnswerButtons(); // Gerar botões de resposta
 }
 
-// Check the answer
+// Variáveis globais
+let currentUser = null; // Armazena o nickname do usuário
+let scores = {}; // Objeto para armazenar os pontos de cada usuário
+
+// Cadastro de usuário
+document.getElementById('registration-form').addEventListener('submit', function (event) {
+  event.preventDefault(); // Evita o envio do formulário
+
+  const username = document.getElementById('username').value.trim();
+  if (username) {
+    currentUser = username;
+
+    // Inicializa o score do usuário se ainda não existir
+    if (!scores[currentUser]) {
+      scores[currentUser] = 0;
+    }
+
+    // Oculta a tela de cadastro
+    document.getElementById('registration-container').style.display = 'none';
+
+    // Exibe o quiz e a tabela de pontuação
+    document.getElementById('quiz-container').style.display = 'block';
+    document.getElementById('scoreboard-container').style.display = 'block';
+
+    // Atualiza a tabela de pontuação
+    updateScoreboard();
+
+    // Inicia o quiz
+    fetchCountries();
+  }
+});
+
+// Atualiza a tabela de pontuação
+function updateScoreboard() {
+  const scoreboardBody = document.querySelector('#scoreboard tbody');
+  scoreboardBody.innerHTML = ''; // Limpa a tabela
+
+  // Ordena os usuários pelo score em ordem decrescente
+  const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
+  for (const [nickname, score] of sortedScores) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${nickname}</td>
+      <td>${score}</td>
+    `;
+    scoreboardBody.appendChild(row);
+  }
+}
+
+// Verifica a resposta e atualiza a pontuação
 function checkAnswer(answer) {
   const answersContainer = document.getElementById('answers-container');
   const resultContainer = document.getElementById('result');
 
   if (answer.toLowerCase() === currentQuestion.capital.toLowerCase()) {
+    // Incrementa o score do usuário atual
+    scores[currentUser] += 1;
+
+    // Atualiza a tabela de pontuação
+    updateScoreboard();
+
     // Exibe a mensagem de acerto
     resultContainer.innerHTML = 'You got it right!';
     resultContainer.style.color = '#FFFFFF'; // Texto branco
@@ -216,6 +272,3 @@ window.addEventListener('load', adjustWeatherTextStyle);
 window.addEventListener('resize', adjustWeatherTextStyle);
 window.addEventListener('load', adjustErrorTextStyle);
 window.addEventListener('resize', adjustErrorTextStyle);
-
-// Initialize the game
-fetchCountries();

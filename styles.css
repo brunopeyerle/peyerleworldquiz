@@ -11,6 +11,7 @@ body {
   height: 100vh;
   margin: 0;
   color: #333; /* Default text color */
+  overflow: hidden; /* Evita rolagem */
 }
 
 /* Estilo para o vídeo de fundo */
@@ -27,15 +28,16 @@ body {
 
 /* Container do quiz com mais transparência */
 #quiz-container {
-  position: relative; /* Garante que o conteúdo fique acima do vídeo */
-  background-color: rgba(240, 248, 255, 0.6); /* Fundo com transparência (80%) */
-  padding: 50px 20px 20px; /* Reduz o padding inferior */
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
-  text-align: center;
-  width: 100%;
-  max-width: 600px; /* Limita a largura máxima */
-  margin: 0 auto; /* Centraliza horizontalmente */
+  position: relative;
+  background-color: rgba(240, 248, 255, 0.6); /* Fundo com transparência */
+  padding: 20px; /* Espaçamento interno para criar uma margem bonita */
+  border-radius: 15px; /* Bordas arredondadas */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para destacar o contêiner */
+  text-align: center; /* Centraliza o conteúdo */
+  width: auto; /* Ajusta a largura automaticamente ao conteúdo */
+  height: auto; /* Ajusta a altura automaticamente ao conteúdo */
+  max-width: 90%; /* Limita a largura máxima a 90% da tela */
+  margin: 20px auto; /* Centraliza o contêiner horizontalmente e adiciona margem superior/inferior */
 }
 
 h1 {
@@ -84,30 +86,35 @@ button:hover {
 
 #result {
   margin-top: 10px;
+  margin-bottom: 20px; /* Adiciona uma margem inferior para separar do próximo elemento */
   font-size: 1.2em;
   font-weight: bold;
-  color: #333333;
+  color: #123961 !important; /* Azul marinho com prioridade */
+  text-shadow: none; /* Remove qualquer sombra no texto */
 }
 
-/* Style for the image container */
+/* Ajusta o contêiner da imagem para caber na tela */
 #image-container {
+  margin-top: 20px; /* Adiciona uma margem superior para separar do elemento anterior */
+  max-height: 100%; /* Limita a altura máxima ao tamanho da tela */
+  overflow: hidden; /* Garante que o conteúdo extra não cause rolagem */
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  gap: 10px; /* Space between the image and the button */
-  margin-top: 10px; /* Add spacing above the container */
-  position: relative; /* Ensure proper positioning for child elements */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centraliza verticalmente */
+  gap: 10px;
+  margin: 0 auto; /* Centraliza horizontalmente */
 }
 
-/* Style for the image */
+/* Ajusta a imagem para caber no contêiner */
 #image-container img {
-  max-width: 100%; /* Limit the maximum width to the container size */
-  width: 300px; /* Set a fixed width */
-  height: 200px; /* Set a fixed height */
-  object-fit: cover; /* Adjust the image to fill the space without distortion */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the image */
-  display: block; /* Ensure the image behaves as a block element */
+  max-width: 80%; /* Limita a largura máxima ao tamanho do contêiner */
+  max-height: 300px; /* Limita a altura máxima da imagem */
+  width: auto; /* Mantém a proporção da largura */
+  height: auto; /* Mantém a proporção da altura */
+  object-fit: contain; /* Ajusta a imagem para caber no espaço sem cortar */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para a imagem */
 }
 
 #weather-container {
@@ -137,7 +144,7 @@ button:hover {
   color: #333333; /* Cor do texto */
   border: none; /* Remove bordas */
   padding: 12px 25px; /* Espaçamento interno */
-  font-size: 1em; /* Tamanho da fonte */
+  font-size: 1em; /* Font size */
   font-weight: bold; /* Texto em negrito */
   border-radius: 25px; /* Bordas arredondadas */
   cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
@@ -155,11 +162,15 @@ button:hover {
 
 /* Style for the answers container */
 #answers-container {
-  display: flex; /* Usa flexbox para layout */
+  display: inline-flex; /* Usa flexbox e ajusta o tamanho ao conteúdo */
   flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha, se necessário */
   justify-content: center; /* Centraliza os botões horizontalmente */
   gap: 10px; /* Espaçamento entre os botões */
-  margin-top: 10px; /* Reduz o espaçamento superior */
+  margin-top: 10px; /* Espaçamento superior */
+  padding: 5px; /* Adiciona um pequeno padding interno */
+  width: auto; /* Ajusta a largura automaticamente ao conteúdo */
+  max-width: 100%; /* Garante que não ultrapasse a largura da tela */
+  text-align: center; /* Centraliza o conteúdo */
 }
 
 /* Botões de cidades (respostas) com azul marinho */
@@ -185,10 +196,48 @@ button:hover {
 }
 
 #logo {
-  display: block;
-  margin: 0px auto; /* Reduz a margem superior e inferior */
-  width: 300px; /* Ajuste a largura conforme necessário */
-  height: auto; /* Mantém a proporção da imagem */
+  position: fixed; /* Fixa o logo no canto superior esquerdo */
+  top: 20px; /* Distância do topo */
+  left: 25px; /* Distância da esquerda */
+  width: 200px; /* Ajusta o tamanho do logo */
+  height: auto; /* Mantém a proporção */
+  z-index: 1000; /* Garante que o logo fique acima de outros elementos */
+}
+
+/* Estilo responsivo para dispositivos móveis */
+@media (max-width: 768px) {
+  #registration-container {
+    background-color: rgba(240, 248, 255, 0.6); /* Fundo com transparência (80%) */
+    height:fit-content; /* Ajusta a altura automaticamente */
+    padding: 15px; /* Reduz o espaçamento interno */
+    border-radius: 10px; /* Mantém bordas arredondadas */
+    align-items: center;
+  }
+
+  #registration-container h1 img {
+    width: 150px; /* Reduz o tamanho do logo */
+    margin-bottom: 15px; /* Ajusta o espaçamento abaixo do logo */
+  }
+
+  #registration-form {
+    gap: 8px; /* Reduz o espaçamento entre os elementos */
+  }
+
+  #registration-form label {
+    font-size: 1em; /* Reduz o tamanho da fonte */
+  }
+
+  #registration-form input {
+    width: 90%; /* Faz o input ocupar toda a largura disponível */
+    max-width: none; /* Remove o limite máximo de largura */
+    padding: 6px; /* Reduz o espaçamento interno */
+  }
+
+  #registration-form button {
+    width: 80%; /* Faz o botão ocupar toda a largura disponível */
+    max-width: none; /* Remove o limite máximo de largura */
+    padding: 10px; /* Mantém o espaçamento interno */
+  }
 }
 
 @media (max-width: 768px) {
@@ -262,4 +311,53 @@ button:hover {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra no texto */
     text-align: center; /* Centraliza o texto */
   }
+}
+
+#scoreboard-container {
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(240, 248, 255, 0.6); /* Transparência igual ao contêiner do quiz */
+  border-radius: 15px; /* Bordas arredondadas iguais ao contêiner do quiz */
+  padding: 20px; /* Espaçamento interno */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra igual ao contêiner do quiz */
+  z-index: 1000; /* Garante que o scoreboard fique acima de outros elementos */
+  width: 300px; /* Largura fixa */
+}
+
+#scoreboard-container h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 1.8em; /* Mesmo tamanho da fonte da pergunta */
+  font-weight: bold;
+  color: #123961; /* Azul marinho igual ao texto da pergunta */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra leve no texto */
+  font-family: 'Roboto', Arial, sans-serif; /* Mesma fonte da pergunta */
+}
+
+#scoreboard {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: rgb(0, 134, 252);
+}
+
+#scoreboard th, #scoreboard td {
+  padding: 10px;
+  border: 1px solid #ccc; /* Bordas da tabela */
+  font-size: 1em; /* Ajuste do tamanho da fonte */
+  font-family: 'Roboto', Arial, sans-serif; /* Mesma fonte da pergunta */
+}
+
+#scoreboard th {
+  background-color: rgba(240, 248, 255, 0.8); /* Fundo claro com transparência */
+  font-weight: bold;
+  color: #003366; /* Azul marinho */
+}
+
+#scoreboard td {
+  background-color: rgba(255, 255, 255, 0.9); /* Fundo branco com leve transparência */
+  color: #333; /* Texto escuro */
 }

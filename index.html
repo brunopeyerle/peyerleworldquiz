@@ -6,21 +6,107 @@
   <title>Country Quiz</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Estilo adicional para centralizar e melhorar a tela de cadastro */
+    #registration-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 45vh; /* Ocupa parte da altura da tela */
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.9); /* Fundo semitransparente */
+      border-radius: 10px; /* Bordas arredondadas */
+      padding: 20px; /* Espaçamento interno */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Sombra para destacar o contêiner */
+    }
+
+    #registration-container h1 img {
+      width: 200px; /* Tamanho do logo */
+      height: auto;
+      margin-bottom: 20px; /* Espaçamento abaixo do logo */
+    }
+
+    #registration-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centraliza os elementos */
+      gap: 15px; /* Espaçamento entre os elementos */
+      width: 100%; /* Ocupa toda a largura do contêiner */
+    }
+
+    #registration-form label {
+      font-size: 1.2em;
+      font-weight: bold; /* Torna o texto mais visível e em negrito */
+      color: #333; /* Texto escuro para contraste */
+    }
+
+    #registration-form input {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 80%; /* Define uma largura fixa para o input */
+      max-width: 300px; /* Define um limite máximo de largura */
+    }
+
+    #registration-form button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #2c66a5;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 80%; /* Define a largura do botão */
+      max-width: 300px; /* Define um limite máximo de largura */
+    }
+
+    #registration-form button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Estilo do vídeo de fundo */
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.8; /* Torna o vídeo um pouco mais escuro */
+    }
+  </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline preload="auto" id="background-video">
-  <source src="./img/background2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-  <div id="quiz-container">
+  <!-- Tela de Cadastro -->
+  <div id="registration-container">
+    <!-- Logo no topo -->
+    <h1>
+      <img src="./img/logo.png" alt="Country Quiz Logo">
+    </h1>
+    <form id="registration-form">
+      <label for="username">Nickname:</label>
+      <input type="text" id="username" name="username" required>
+      <button type="submit">Start Quiz</button>
+    </form>
+  </div>
+
+  <!-- Vídeo de fundo -->
+  <video autoplay muted loop id="background-video">
+    <source src="./img/background2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Quiz Container (inicialmente oculto) -->
+  <div id="quiz-container" style="display: none;">
     <img src="./img/logo.png" alt="Country Quiz Logo" id="logo" />
     <div id="question-container">
       <p id="question">
         What is the capital of France?
       </p>
-      <div id="answers-container">
-        <!-- Answer buttons will be generated dynamically -->
-      </div>
+      <div id="answers-container"></div>
     </div>
     <div id="result"></div>
     <div id="image-container">
@@ -37,6 +123,27 @@
     </div>
     <button id="new-question-button" onclick="getRandomQuestion()">New Question</button>
   </div>
+
+  <!-- Contêiner de Pontuação -->
+  <div id="score-container" style="text-align: center; margin-bottom: 20px; display: none;">
+    <p>Score: <span id="score">0</span></p>
+  </div>
+
+  <!-- Tabela de Pontuação -->
+<div id="scoreboard-container" style="display: none; position: fixed; top: 10px; right: 10px; background-color: rgba(255, 255, 255, 0.4); border-radius: 10px; padding: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000;">
+  <h3 style="margin: 0; text-align: center;">Scoreboard</h3>
+  <table id="scoreboard" border="1" style="width: 100%; text-align: center; border-collapse: collapse; margin-top: 10px;">
+    <thead>
+      <tr>
+        <th>Nickname</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- As linhas da tabela serão geradas dinamicamente -->
+    </tbody>
+  </table>
+</div>
 
   <script src="scripts.js"></script>
 </body>
